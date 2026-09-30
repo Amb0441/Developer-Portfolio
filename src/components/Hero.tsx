@@ -64,7 +64,7 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="lg:col-span-5 relative block mt-8 lg:mt-0 animate-fade-in-up delay-400">
+          <div className="lg:col-span-5 relative hidden lg:block mt-8 lg:mt-0 animate-fade-in-up delay-400">
              <div className="relative w-full aspect-[4/5] max-w-sm mx-auto xl:max-w-md">
                 <div className="absolute inset-0 border-2 border-primary translate-x-4 translate-y-4 rounded-2xl -z-10 transition-transform duration-500 hover:translate-x-6 hover:translate-y-6"></div>
                 <div className="w-full h-full rounded-2xl overflow-hidden border border-border bg-card shadow-2xl relative z-10">
