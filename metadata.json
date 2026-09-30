@@ -1,0 +1,6 @@
+{
+  "name": "Developer Portfolio",
+  "description": "A minimalist and professional full-stack developer portfolio.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
