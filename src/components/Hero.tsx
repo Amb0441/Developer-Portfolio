@@ -69,7 +69,7 @@ export function Hero() {
                 <div className="absolute inset-0 border-2 border-primary translate-x-4 translate-y-4 rounded-2xl -z-10 transition-transform duration-500 hover:translate-x-6 hover:translate-y-6"></div>
                 <div className="w-full h-full rounded-2xl overflow-hidden border border-border bg-card shadow-2xl relative z-10">
                   <img
-                    src="/DSC_3261.JPG"
+                    src="/dsc_3261.jpg"
                     alt="Anthony M. Ballestra"
                     className="w-full h-full object-cover object-center"
                     onError={(e) => {

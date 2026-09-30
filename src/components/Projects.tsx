@@ -34,7 +34,7 @@ const projects: Project[] = [
         label: "Web"
       }
     ],
-    image: "/Safe.png",
+    image: "/safe.png",
     delay: "delay-100"
   },
   {
@@ -82,8 +82,8 @@ export function Projects() {
                   loading="lazy"
                   onError={(e) => {
                     const target = e.currentTarget;
-                    if (target.src.includes('/Safe.png')) {
-                      target.src = '/safe.png';
+                    if (target.src.includes('/safe.png')) {
+                      target.src = '/safeclinic.jpg';
                     }
                   }}
                   className="w-full h-full object-cover transform-gpu will-change-transform group-hover:scale-105 transition-transform duration-500 ease-out"
