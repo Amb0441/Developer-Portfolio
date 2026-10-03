@@ -18,6 +18,26 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: "Pulse Market",
+    badge: "Hyper-Local Marketplace",
+    description: "A neighbourhood marketplace for the Philippines. Drop a pin on signup — you see what's nearby, message in-app, and pick it up. No shipping, no bidding.",
+    tech: ["React", "TypeScript", "Vite", "Tailwind", "TanStack Query", "Leaflet", "Express", "Bun", "Supabase", "Cloudinary"],
+    links: [
+      {
+        type: "web",
+        url: "https://pulse-market-eh1.pages.dev/",
+        label: "Web"
+      },
+      {
+        type: "github",
+        url: "https://github.com/Amb0441/Pulse-Market",
+        label: "GitHub"
+      }
+    ],
+    image: "/pulse-market.png",
+    delay: "delay-100"
+  },
+  {
     title: "SafeClinic",
     badge: "Mobile App & Web CRM",
     description: "A digital directory and clinic CRM (available as a mobile web app and web platform) designed to protect the public from unlicensed aesthetic and cosmetic scams. It provides a centralized, transparent hub where residents can find safe, legally registered clinics, ensuring they only receive treatments from credentialed medical professionals.",
@@ -35,7 +55,7 @@ const projects: Project[] = [
       }
     ],
     image: "/safe.png",
-    delay: "delay-100"
+    delay: "delay-200"
   },
   {
     title: "Nike Air Jordan 1 'Banned'",
@@ -55,17 +75,17 @@ const projects: Project[] = [
       }
     ],
     image: "/jordan-1.png",
-    delay: "delay-200"
+    delay: "delay-300"
   }
 ];
 
 export function Projects() {
   return (
-    <section id="projects" className="py-16 md:py-24 px-6 md:px-12 max-w-7xl mx-auto">
+    <section id="projects" className="py-20 md:py-28 px-6 md:px-12 max-w-7xl mx-auto">
       <div>
-        <div className="flex items-center gap-6 mb-16 md:mb-24 scroll-reveal">
+        <div className="flex items-center gap-6 mb-12 md:mb-20">
           <h2 className="text-4xl md:text-5xl font-serif tracking-tight">Selected Works</h2>
-          <div className="flex-grow h-[1px] bg-border"></div>
+          <div className="flex-grow h-px bg-border"></div>
         </div>
         
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
@@ -98,7 +118,7 @@ export function Projects() {
                   </div>
                 )}
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                <div className="project-overlay absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                   <div className="flex items-center gap-3">
                     {project.links.map((link) => (
                       <div key={link.label} className="relative group/link flex items-center">
@@ -133,13 +153,12 @@ export function Projects() {
 
               {/* Content Box */}
               <div className="p-6 md:p-8 flex flex-col flex-grow">
-                <div className="flex items-center justify-between gap-4 mb-3">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between mb-3">
                   <h3 className="text-2xl md:text-3xl font-serif text-foreground group-hover:text-primary transition-colors">
                     {project.title}
                   </h3>
                   
-                  {/* Quick Links with Hover Tooltip */}
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 shrink-0">
                     {project.links.map((link) => (
                       <div key={link.label} className="relative group/titlelink">
                         {/* Hover Tooltip */}

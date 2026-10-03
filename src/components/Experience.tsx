@@ -2,16 +2,16 @@ const experiences = [
   {
     role: "Full Stack Developer Intern",
     company: "Moneytrees",
-    period: "2026 — 2026",
+    period: "2026",
     delay: "delay-100"
   }
 ];
 
 export function Experience() {
   return (
-    <section id="experience" className="py-16 md:py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-border">
-      <div className="grid md:grid-cols-4 gap-12 md:gap-24 scroll-reveal">
-        <h2 className="text-4xl md:text-6xl md:col-span-1 tracking-tight">
+    <section id="experience" className="py-20 md:py-28 px-6 md:px-12 max-w-7xl mx-auto border-t border-border">
+      <div className="grid md:grid-cols-4 gap-12 md:gap-24">
+        <h2 className="text-4xl md:text-5xl md:col-span-1 tracking-tight">
           Experience
         </h2>
         

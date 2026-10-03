@@ -24,17 +24,8 @@ export function Contact() {
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    
-    if (name === 'email') {
-      if (!value) setErrors(prev => ({ ...prev, email: 'Email is required' }));
-      else if (!validateEmail(value)) setErrors(prev => ({ ...prev, email: 'Please enter a valid email' }));
-      else setErrors(prev => ({ ...prev, email: '' }));
-    } else if (name === 'name') {
-      if (!value.trim()) setErrors(prev => ({ ...prev, name: 'Name is required' }));
-      else setErrors(prev => ({ ...prev, name: '' }));
-    } else {
-      if (!value.trim()) setErrors(prev => ({ ...prev, message: 'Message is required' }));
-      else setErrors(prev => ({ ...prev, message: '' }));
+    if (errors[name as keyof typeof errors]) {
+      setErrors(prev => ({ ...prev, [name]: '' }));
     }
   };
 
@@ -105,11 +96,11 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-16 md:py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-border scroll-reveal">
+    <section id="contact" className="py-20 md:py-28 px-6 md:px-12 max-w-7xl mx-auto border-t border-border">
       <div>
         <div className="grid md:grid-cols-2 gap-16 md:gap-24">
           <div>
-            <div className="flex items-center gap-6 mb-12">
+            <div className="flex items-center gap-6 mb-10">
               <h2 className="text-4xl md:text-5xl font-serif tracking-tight">Get in touch</h2>
             </div>
             <p className="font-sans text-xl leading-relaxed text-muted-foreground max-w-md mb-8">
@@ -161,9 +152,9 @@ export function Contact() {
             </div>
           </div>
           
-          <div className="flex flex-col gap-6 font-sans bg-muted/30 p-8 md:p-10 rounded-2xl border border-border scroll-reveal delay-200">
+          <div className="flex flex-col gap-6 font-sans bg-muted/30 p-8 md:p-10 rounded-2xl border border-border">
             {submitSuccess && dispatchedData ? (
-              <div className="space-y-6 animate-fade-in">
+              <div className="space-y-6 animate-fade-in-up">
                 <div className="flex items-start gap-4 p-4 rounded-xl bg-primary/10 border border-primary/20">
                   <div className="p-2 rounded-full bg-primary/20 text-primary mt-0.5">
                     <Check className="w-5 h-5" />
@@ -246,14 +237,17 @@ export function Contact() {
                 <div className="flex flex-col gap-2">
                   <div className="flex justify-between items-end">
                     <label htmlFor="name" className="text-sm font-medium text-foreground">Name</label>
-                    {errors.name && <span className="text-xs font-medium text-primary">{errors.name}</span>}
+                    {errors.name && <span id="name-error" className="text-xs font-medium text-primary">{errors.name}</span>}
                   </div>
                   <input
                     type="text"
                     id="name"
                     name="name"
+                    autoComplete="name"
                     value={formData.name}
                     onChange={handleChange}
+                    aria-invalid={Boolean(errors.name)}
+                    aria-describedby={errors.name ? 'name-error' : undefined}
                     className="w-full bg-background border border-border rounded-lg px-4 py-3 outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-foreground text-sm"
                     placeholder="e.g. John Doe or Company"
                   />
@@ -262,14 +256,18 @@ export function Contact() {
                 <div className="flex flex-col gap-2">
                   <div className="flex justify-between items-end">
                     <label htmlFor="email" className="text-sm font-medium text-foreground">Email</label>
-                    {errors.email && <span className="text-xs font-medium text-primary">{errors.email}</span>}
+                    {errors.email && <span id="email-error" className="text-xs font-medium text-primary">{errors.email}</span>}
                   </div>
                   <input
                     type="email"
                     id="email"
                     name="email"
+                    autoComplete="email"
+                    inputMode="email"
                     value={formData.email}
                     onChange={handleChange}
+                    aria-invalid={Boolean(errors.email)}
+                    aria-describedby={errors.email ? 'email-error' : undefined}
                     className="w-full bg-background border border-border rounded-lg px-4 py-3 outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-foreground text-sm"
                     placeholder="e.g. you@example.com"
                   />
@@ -278,7 +276,7 @@ export function Contact() {
                 <div className="flex flex-col gap-2">
                   <div className="flex justify-between items-end">
                     <label htmlFor="message" className="text-sm font-medium text-foreground">Message</label>
-                    {errors.message && <span className="text-xs font-medium text-primary">{errors.message}</span>}
+                    {errors.message && <span id="message-error" className="text-xs font-medium text-primary">{errors.message}</span>}
                   </div>
                   <textarea
                     id="message"
@@ -286,6 +284,8 @@ export function Contact() {
                     rows={4}
                     value={formData.message}
                     onChange={handleChange}
+                    aria-invalid={Boolean(errors.message)}
+                    aria-describedby={errors.message ? 'message-error' : undefined}
                     className="w-full bg-background border border-border rounded-lg px-4 py-3 outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-foreground resize-none text-sm"
                     placeholder="Tell me about your project, timeline, or inquiry..."
                   ></textarea>

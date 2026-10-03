@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowUp, Github, Linkedin, Mail } from 'lucide-react';
 
 export function Footer() {
   return (
@@ -33,6 +33,14 @@ export function Footer() {
         >
           <Mail className="w-4 h-4" />
           <span>Email</span>
+        </a>
+        <a
+          href="#hero"
+          className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 normal-case tracking-normal text-xs font-medium"
+          aria-label="Back to top"
+        >
+          <ArrowUp className="w-4 h-4" />
+          <span>Top</span>
         </a>
       </div>
     </footer>

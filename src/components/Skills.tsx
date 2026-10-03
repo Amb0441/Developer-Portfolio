@@ -33,18 +33,18 @@ const skillCategories = [
 
 export function Skills() {
   return (
-    <section id="skills" className="py-16 md:py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-border">
+    <section id="skills" className="py-20 md:py-28 px-6 md:px-12 max-w-7xl mx-auto border-t border-border">
       <div>
-        <div className="flex items-center gap-6 mb-16 md:mb-24 scroll-reveal">
+        <div className="flex items-center gap-6 mb-12 md:mb-20">
           <h2 className="text-4xl md:text-5xl font-serif tracking-tight">Capabilities</h2>
-          <div className="flex-grow h-[1px] bg-border"></div>
+          <div className="flex-grow h-px bg-border"></div>
         </div>
         
         <div className="grid md:grid-cols-3 gap-6">
           {skillCategories.map((category) => (
             <div 
               key={category.title} 
-              className={`p-8 rounded-2xl bg-muted/40 border border-border hover:bg-muted/80 transition-colors ${category.colSpan} scroll-reveal ${category.delay}`}
+              className={`p-8 rounded-2xl bg-muted/40 border border-border hover:border-primary/40 hover:bg-muted/80 hover:-translate-y-0.5 transition-all duration-300 ${category.colSpan} scroll-reveal ${category.delay}`}
             >
               {category.icon}
               <h3 className="text-2xl font-serif mb-6">{category.title}</h3>

@@ -11,7 +11,6 @@ import { Footer } from './components/Footer';
 
 export default function App() {
   useEffect(() => {
-    // Ultra-lightweight native intersection observer for zero-overhead animations
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -20,19 +19,44 @@ export default function App() {
         }
       });
     }, { 
-      threshold: 0.1, 
-      rootMargin: '0px 0px -50px 0px' 
+      threshold: 0.05, 
+      rootMargin: '0px 0px -10% 0px' 
     });
 
-    const elements = document.querySelectorAll('.scroll-reveal');
-    elements.forEach(el => observer.observe(el));
+    const observeNew = () => {
+      document.querySelectorAll('.scroll-reveal:not(.animate-fade-in-up)').forEach((el) => {
+        observer.observe(el);
+      });
+    };
+
+    observeNew();
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.scroll-reveal:not(.animate-fade-in-up)').forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          el.classList.add('animate-fade-in-up');
+          observer.unobserve(el);
+        }
+      });
+    });
+    const mutation = new MutationObserver(observeNew);
+    mutation.observe(document.body, { childList: true, subtree: true });
     
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      mutation.disconnect();
+    };
   }, []);
 
   return (
     <ThemeProvider defaultTheme="system">
-      <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground transition-colors duration-300">
+      <div className="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-foreground transition-colors duration-300">
+        <a
+          href="#hero"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[60] focus:px-4 focus:py-2 focus:bg-foreground focus:text-background focus:rounded-full focus:font-sans focus:text-sm"
+        >
+          Skip to content
+        </a>
         <Navbar />
         <main>
           <Hero />
