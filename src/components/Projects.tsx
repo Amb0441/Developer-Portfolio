@@ -1,7 +1,7 @@
-import { Github, Smartphone, Globe } from 'lucide-react';
+import { Github, Smartphone, Globe, Shield } from 'lucide-react';
 
 interface ProjectLink {
-  type: 'app' | 'web' | 'github';
+  type: 'app' | 'web' | 'github' | 'admin';
   url: string;
   label: string; // Shown on hover: "App", "Web", etc.
 }
@@ -17,6 +17,26 @@ interface Project {
 }
 
 const projects: Project[] = [
+  {
+    title: "Likharrio",
+    badge: "Artist Community",
+    description: "A community for Cordilleran artists and the people who follow their work. Artists showcase, sell, and post events; fans browse, save, and message. One Expo app for phone and web, plus a separate admin site.",
+    tech: ["Expo", "React Native", "TypeScript", "Zustand", "TanStack Query", "Firebase", "Cloudinary"],
+    links: [
+      {
+        type: "app",
+        url: "https://likharrio-82864.web.app",
+        label: "App"
+      },
+      {
+        type: "admin",
+        url: "https://likharrio-82864-admin.web.app",
+        label: "Admin"
+      }
+    ],
+    image: "/likharrio.png",
+    delay: "delay-100"
+  },
   {
     title: "Pulse Market",
     badge: "Hyper-Local Marketplace",
@@ -35,7 +55,7 @@ const projects: Project[] = [
       }
     ],
     image: "/pulse-market.png",
-    delay: "delay-100"
+    delay: "delay-200"
   },
   {
     title: "SafeClinic",
@@ -55,7 +75,7 @@ const projects: Project[] = [
       }
     ],
     image: "/safe.png",
-    delay: "delay-200"
+    delay: "delay-300"
   },
   {
     title: "Nike Air Jordan 1 'Banned'",
@@ -75,7 +95,7 @@ const projects: Project[] = [
       }
     ],
     image: "/jordan-1.png",
-    delay: "delay-300"
+    delay: "delay-400"
   }
 ];
 
@@ -141,6 +161,7 @@ export function Projects() {
                           {link.type === 'app' && <Smartphone className="w-4 h-4 shrink-0" />}
                           {link.type === 'web' && <Globe className="w-4 h-4 shrink-0" />}
                           {link.type === 'github' && <Github className="w-4 h-4 shrink-0" />}
+                          {link.type === 'admin' && <Shield className="w-4 h-4 shrink-0" />}
                           <span className="text-xs font-sans font-medium">
                             {link.label}
                           </span>
@@ -179,6 +200,7 @@ export function Projects() {
                           {link.type === 'app' && <Smartphone className="w-3.5 h-3.5" />}
                           {link.type === 'web' && <Globe className="w-3.5 h-3.5" />}
                           {link.type === 'github' && <Github className="w-3.5 h-3.5" />}
+                          {link.type === 'admin' && <Shield className="w-3.5 h-3.5" />}
                           <span>{link.label}</span>
                         </a>
                       </div>
