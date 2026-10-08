@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ThemeProvider } from './components/ThemeProvider';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
@@ -8,43 +8,52 @@ import { Projects } from './components/Projects';
 import { Experience } from './components/Experience';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
+import { ResumeModal } from './components/ResumeModal';
 
 export default function App() {
+  const [resumeOpen, setResumeOpen] = useState(false);
   useEffect(() => {
+    const reveal = (el: Element) => {
+      el.classList.add('animate-fade-in-up');
+    };
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('animate-fade-in-up');
+          reveal(entry.target);
           observer.unobserve(entry.target);
         }
       });
-    }, { 
-      threshold: 0.05, 
-      rootMargin: '0px 0px -10% 0px' 
+    }, {
+      threshold: 0,
+      rootMargin: '0px 0px 35% 0px'
     });
 
-    const observeNew = () => {
+    const revealVisible = () => {
       document.querySelectorAll('.scroll-reveal:not(.animate-fade-in-up)').forEach((el) => {
         observer.observe(el);
-      });
-    };
-
-    observeNew();
-    requestAnimationFrame(() => {
-      document.querySelectorAll('.scroll-reveal:not(.animate-fade-in-up)').forEach((el) => {
         const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight && rect.bottom > 0) {
-          el.classList.add('animate-fade-in-up');
+        if (rect.top < window.innerHeight + 120 && rect.bottom > -80) {
+          reveal(el);
           observer.unobserve(el);
         }
       });
-    });
-    const mutation = new MutationObserver(observeNew);
+    };
+
+    revealVisible();
+    requestAnimationFrame(revealVisible);
+    window.addEventListener('hashchange', revealVisible);
+    window.addEventListener('scroll', revealVisible, { passive: true });
+    window.addEventListener('resize', revealVisible);
+    const mutation = new MutationObserver(revealVisible);
     mutation.observe(document.body, { childList: true, subtree: true });
-    
+
     return () => {
       observer.disconnect();
       mutation.disconnect();
+      window.removeEventListener('hashchange', revealVisible);
+      window.removeEventListener('scroll', revealVisible);
+      window.removeEventListener('resize', revealVisible);
     };
   }, []);
 
@@ -57,9 +66,9 @@ export default function App() {
         >
           Skip to content
         </a>
-        <Navbar />
+        <Navbar onOpenResume={() => setResumeOpen(true)} />
         <main>
-          <Hero />
+          <Hero onOpenResume={() => setResumeOpen(true)} />
           <About />
           <Skills />
           <Projects />
@@ -67,6 +76,7 @@ export default function App() {
           <Contact />
         </main>
         <Footer />
+        <ResumeModal open={resumeOpen} onClose={() => setResumeOpen(false)} />
       </div>
     </ThemeProvider>
   );

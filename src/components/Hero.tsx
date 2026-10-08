@@ -1,6 +1,10 @@
-import { Github, Linkedin, Mail, ArrowRight } from 'lucide-react';
+import { Github, Linkedin, Mail, ArrowRight, FileText } from 'lucide-react';
 
-export function Hero() {
+type HeroProps = {
+  onOpenResume: () => void;
+};
+
+export function Hero({ onOpenResume }: HeroProps) {
   return (
     <section id="hero" className="relative pt-8 md:pt-16 pb-20 md:pb-28 px-6 md:px-12 border-b border-border overflow-hidden">
       <div className="absolute inset-0 bg-dot-pattern opacity-50 dark:opacity-30 pointer-events-none [mask-image:linear-gradient(to_bottom,white,transparent)]" />
@@ -27,7 +31,7 @@ export function Hero() {
               Hi, I'm Anthony M. Ballestra. A full stack and cross-platform developer based in Baguio City, building applications people can actually use.
             </p>
             
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 animate-fade-in-up delay-300">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-4 animate-fade-in-up delay-300">
               <a 
                 href="#projects" 
                 className="group inline-flex items-center justify-center gap-3 bg-foreground text-background px-8 py-4 rounded-full font-sans font-medium hover:bg-primary hover:text-primary-foreground transition-all duration-300"
@@ -41,6 +45,15 @@ export function Hero() {
               >
                 Get in touch
               </a>
+              <button
+                type="button"
+                onClick={onOpenResume}
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-sans font-medium border border-border bg-background/70 hover:border-primary/50 hover:text-primary transition-all duration-300"
+                aria-haspopup="dialog"
+              >
+                <FileText className="w-4 h-4" />
+                View Resume
+              </button>
               
               <div className="flex items-center justify-center sm:justify-start gap-2 sm:ml-2">
                 <a 

@@ -138,7 +138,7 @@ export function Projects() {
                   </div>
                 )}
 
-                <div className="project-overlay absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                <div className="project-overlay absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-300 flex items-end p-6">
                   <div className="flex items-center gap-3">
                     {project.links.map((link) => (
                       <div key={link.label} className="relative group/link flex items-center">

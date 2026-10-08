@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Moon, Sun, Menu, X } from 'lucide-react';
+import { Moon, Sun, Menu, X, FileText } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 
 const navLinks = [
@@ -9,7 +9,11 @@ const navLinks = [
   { name: 'Contact', href: '#contact' },
 ];
 
-export function Navbar() {
+type NavbarProps = {
+  onOpenResume: () => void;
+};
+
+export function Navbar({ onOpenResume }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState('');
@@ -79,8 +83,17 @@ export function Navbar() {
               </a>
             ))}
             <button
+              type="button"
+              onClick={onOpenResume}
+              className="ml-2 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border text-[11px] tracking-[0.14em] hover:border-primary/50 hover:text-primary transition-colors"
+              aria-haspopup="dialog"
+            >
+              <FileText className="h-3.5 w-3.5" strokeWidth={1.5} />
+              Resume
+            </button>
+            <button
               onClick={toggleTheme}
-              className="ml-2 p-2 rounded-full text-foreground hover:bg-muted hover:text-primary transition-colors"
+              className="p-2 rounded-full text-foreground hover:bg-muted hover:text-primary transition-colors"
               aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
             >
               <Sun className="h-5 w-5 hidden dark:block" strokeWidth={1.5} />
@@ -112,7 +125,7 @@ export function Navbar() {
         <div 
           id="mobile-nav"
           aria-hidden={!mobileMenuOpen}
-          className={`md:hidden overflow-hidden border-b border-border bg-background/95 backdrop-blur-xl transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0 border-transparent pointer-events-none'}`}
+          className={`md:hidden overflow-hidden border-b border-border bg-background/95 backdrop-blur-xl transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'max-h-[22rem] opacity-100' : 'max-h-0 opacity-0 border-transparent pointer-events-none'}`}
         >
           <div className="px-6 py-6 flex flex-col gap-2 font-sans text-sm uppercase tracking-[0.2em]">
             {navLinks.map((link) => (
@@ -125,6 +138,18 @@ export function Navbar() {
                 {link.name}
               </a>
             ))}
+            <button
+              type="button"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenResume();
+              }}
+              className="py-3 text-left inline-flex items-center gap-2"
+              aria-haspopup="dialog"
+            >
+              <FileText className="h-4 w-4" strokeWidth={1.5} />
+              Resume
+            </button>
           </div>
         </div>
       </nav>

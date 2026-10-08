@@ -87,6 +87,13 @@
   will-change: transform, opacity;
 }
 
+@media (scripting: none) {
+  .scroll-reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* Tighter stagger delays for faster cascading */
 .delay-100 { animation-delay: 50ms; }
 .delay-200 { animation-delay: 100ms; }
@@ -97,7 +104,32 @@
 @media (hover: none) {
   .project-overlay {
     opacity: 1;
+    pointer-events: auto;
     background: linear-gradient(to top, rgb(0 0 0 / 0.55), transparent 55%);
+  }
+}
+
+@media print {
+  body * {
+    visibility: hidden !important;
+  }
+
+  .resume-sheet,
+  .resume-sheet * {
+    visibility: visible !important;
+  }
+
+  .resume-sheet {
+    position: static !important;
+    max-height: none !important;
+    max-width: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    overflow: visible !important;
+  }
+
+  .resume-sheet > div:first-child {
+    display: none !important;
   }
 }
 
