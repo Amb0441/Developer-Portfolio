@@ -16,7 +16,19 @@ interface Project {
   delay: string;
 }
 
-const projects: Project[] = [
+interface ProjectCategory {
+  id: string;
+  label: string;
+  note: string;
+  projects: Project[];
+}
+
+const categories: ProjectCategory[] = [
+  {
+    id: "full-stack",
+    label: "Full Stack",
+    note: "Products with a real backend, data, and more than one surface.",
+    projects: [
   {
     title: "Likharrio",
     badge: "Artist Community",
@@ -77,6 +89,53 @@ const projects: Project[] = [
     image: "/safe.png",
     delay: "delay-300"
   },
+    ],
+  },
+  {
+    id: "website-development",
+    label: "Website Development",
+    note: "Visual sites and front-end studies.",
+    projects: [
+  {
+    title: "Vela Atelier",
+    badge: "Kitchen & Bathroom",
+    description: "A fictional kitchen and bathroom storefront: catalogues, product pages, cart, consult booking, a planning studio, and scripted support chat. Nothing is for sale — studios and prices are made up.",
+    tech: ["React", "TypeScript", "Vite", "Tailwind", "Motion"],
+    links: [
+      {
+        type: "web",
+        url: "https://amb0441.github.io/Vela-Atelier---Kitchen-Bathroom-Fixtures/",
+        label: "Web"
+      },
+      {
+        type: "github",
+        url: "https://github.com/Amb0441/Vela-Atelier---Kitchen-Bathroom-Fixtures",
+        label: "GitHub"
+      }
+    ],
+    image: "/vela-atelier.jpg",
+    delay: "delay-100"
+  },
+  {
+    title: "North Reef",
+    badge: "Property Website",
+    description: "A mock property site: search listings, team and offices, appraisals, calculators, a maintenance portal, and an on-site assistant. Sample data only — not a real agency.",
+    tech: ["React", "TypeScript", "Vite", "Tailwind", "React Router", "Motion"],
+    links: [
+      {
+        type: "web",
+        url: "https://amb0441.github.io/North-Reef/",
+        label: "Web"
+      },
+      {
+        type: "github",
+        url: "https://github.com/Amb0441/North-Reef",
+        label: "GitHub"
+      }
+    ],
+    image: "/north-reef.png",
+    delay: "delay-200"
+  },
   {
     title: "Nike Air Jordan 1 'Banned'",
     badge: "Interactive Web Archive",
@@ -95,23 +154,55 @@ const projects: Project[] = [
       }
     ],
     image: "/jordan-1.png",
+    delay: "delay-300"
+  },
+  {
+    title: "Marlowe",
+    badge: "Marlowe",
+    description: "A studio site for a brow atelier in Subiaco, Perth. Editorial layout with services, gallery, products, booking, and aftercare — shaped to feel close to the work, never louder than it.",
+    tech: ["React", "TypeScript", "Vite", "Tailwind", "Motion"],
+    links: [
+      {
+        type: "web",
+        url: "https://amb0441.github.io/Marlowe-Brow-Atelier/",
+        label: "Web"
+      },
+      {
+        type: "github",
+        url: "https://github.com/Amb0441/Marlowe-Brow-Atelier",
+        label: "GitHub"
+      }
+    ],
+    image: "/marlowe.jpg",
     delay: "delay-400"
+  },
+  {
+    title: "Zahra",
+    badge: "Lebanese Restaurant",
+    description: "A site for Zahra, a Lebanese kitchen and shisha lounge in Surry Hills. Menu, reservations, waitlist, banquet enquiries, and online ordering — set in a dark editorial layout with the grill at the centre.",
+    tech: ["React", "TypeScript", "Vite", "Tailwind", "Motion"],
+    links: [
+      {
+        type: "web",
+        url: "https://amb0441.github.io/Zahra-Lebanese-restaurant/",
+        label: "Web"
+      },
+      {
+        type: "github",
+        url: "https://github.com/Amb0441/Zahra-Lebanese-restaurant",
+        label: "GitHub"
+      }
+    ],
+    image: "/zahra.png",
+    delay: "delay-500"
   }
+    ],
+  },
 ];
 
-export function Projects() {
+function ProjectCard({ project }: { project: Project }) {
   return (
-    <section id="projects" className="py-20 md:py-28 px-6 md:px-12 max-w-7xl mx-auto">
-      <div>
-        <div className="flex items-center gap-6 mb-12 md:mb-20">
-          <h2 className="text-4xl md:text-5xl font-serif tracking-tight">Selected Works</h2>
-          <div className="flex-grow h-px bg-border"></div>
-        </div>
-        
-        <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-          {projects.map((project) => (
             <div 
-              key={project.title}
               className={`group flex flex-col bg-muted/40 border border-border rounded-2xl overflow-hidden hover:border-primary/50 hover:shadow-xl transition-all duration-300 scroll-reveal ${project.delay}`}
             >
               {/* Image Container with Zoom on Hover */}
@@ -175,9 +266,9 @@ export function Projects() {
               {/* Content Box */}
               <div className="p-6 md:p-8 flex flex-col flex-grow">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between mb-3">
-                  <h3 className="text-2xl md:text-3xl font-serif text-foreground group-hover:text-primary transition-colors">
+                  <h4 className="text-2xl md:text-3xl font-serif text-foreground group-hover:text-primary transition-colors">
                     {project.title}
-                  </h3>
+                  </h4>
                   
                   <div className="flex items-center gap-2 shrink-0">
                     {project.links.map((link) => (
@@ -219,6 +310,31 @@ export function Projects() {
                     </span>
                   ))}
                 </div>
+              </div>
+            </div>
+  );
+}
+
+export function Projects() {
+  return (
+    <section id="projects" className="py-20 md:py-28 px-6 md:px-12 max-w-7xl mx-auto">
+      <div>
+        <div className="flex items-center gap-6 mb-12 md:mb-16">
+          <h2 className="text-4xl md:text-5xl font-serif tracking-tight">Selected Works</h2>
+          <div className="flex-grow h-px bg-border"></div>
+        </div>
+
+        <div className="flex flex-col gap-16 md:gap-24">
+          {categories.map((category) => (
+            <div key={category.id}>
+              <div className="mb-8 md:mb-10">
+                <h3 className="text-2xl md:text-3xl font-serif tracking-tight">{category.label}</h3>
+                <p className="mt-2 text-sm font-sans text-muted-foreground">{category.note}</p>
+              </div>
+              <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+                {category.projects.map((project) => (
+                  <ProjectCard key={project.title} project={project} />
+                ))}
               </div>
             </div>
           ))}

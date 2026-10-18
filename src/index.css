@@ -109,27 +109,229 @@
   }
 }
 
+.resume-document {
+  background: #fff;
+  color: #111;
+  padding: 0.55in 0.65in 0.5in;
+  font-family: "Times New Roman", Times, Georgia, "Instrument Serif", serif;
+  font-size: 10pt;
+  line-height: 1.28;
+}
+
+.resume-doc-header {
+  text-align: center;
+  margin-bottom: 8pt;
+}
+
+.resume-document h2 {
+  font-family: "Times New Roman", Times, Georgia, serif;
+  font-size: 22pt;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.15;
+  color: #111;
+}
+
+.resume-doc-role {
+  margin-top: 4pt;
+  font-family: "Times New Roman", Times, Georgia, serif;
+  font-size: 12pt;
+  font-style: italic;
+  color: #333;
+}
+
+.resume-doc-contact {
+  margin-top: 8pt;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 6.4in;
+  font-family: "Times New Roman", Times, Georgia, serif;
+  font-size: 10pt;
+  line-height: 1.45;
+  color: #222;
+}
+
+.resume-doc-contact a {
+  color: #111;
+  text-decoration: none;
+}
+
+.resume-document h3 {
+  font-family: "Times New Roman", Times, Georgia, serif;
+  font-size: 11pt;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-bottom: 1.5px solid #111;
+  padding-bottom: 2pt;
+  margin: 7pt 0 3pt;
+  color: #111;
+}
+
+.resume-document section p,
+.resume-document li p {
+  color: #222;
+}
+
+.resume-doc-entry + .resume-doc-entry {
+  margin-top: 8pt;
+}
+
+.resume-doc-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12pt;
+}
+
+.resume-doc-strong {
+  font-weight: 700;
+  color: #111;
+}
+
+.resume-doc-date {
+  font-size: 10pt;
+  white-space: nowrap;
+  color: #333;
+}
+
+.resume-doc-meta {
+  font-style: italic;
+  color: #333;
+}
+
+.resume-doc-projects {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5pt;
+}
+
+.resume-doc-list {
+  list-style: disc;
+  margin: 2pt 0 0 1.15em;
+  padding: 0;
+}
+
+.resume-doc-list li {
+  margin: 1pt 0;
+  padding-left: 2pt;
+}
+
+.resume-doc-links {
+  font-size: 10pt;
+  color: #222;
+}
+
+.resume-doc-skills {
+  display: grid;
+  gap: 4pt;
+}
+
+.resume-doc-skills div {
+  display: grid;
+  grid-template-columns: 6.2rem 1fr;
+  gap: 8pt;
+}
+
+.resume-doc-skills dt {
+  font-weight: 700;
+  color: #111;
+}
+
+.resume-doc-skills dd {
+  color: #222;
+}
+
+@media (max-width: 640px) {
+  .resume-document {
+    padding: 1.4rem 1.25rem 1.6rem;
+  }
+
+  .resume-doc-row {
+    flex-direction: column;
+    gap: 2pt;
+  }
+
+  .resume-doc-date {
+    white-space: normal;
+  }
+
+  .resume-doc-skills div {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
 @media print {
-  body * {
-    visibility: hidden !important;
+  @page {
+    size: letter portrait;
+    margin: 0.5in 0.6in;
   }
 
-  .resume-sheet,
-  .resume-sheet * {
-    visibility: visible !important;
-  }
-
-  .resume-sheet {
-    position: static !important;
-    max-height: none !important;
-    max-width: none !important;
-    box-shadow: none !important;
-    border: none !important;
+  html, body, #root {
+    background: #fff !important;
+    color: #111 !important;
+    height: auto !important;
     overflow: visible !important;
   }
 
-  .resume-sheet > div:first-child {
+  nav,
+  main,
+  footer,
+  .no-print {
     display: none !important;
+  }
+
+  .resume-modal-root,
+  .resume-sheet,
+  .resume-sheet > div:not(.no-print) {
+    position: static !important;
+    inset: auto !important;
+    display: block !important;
+    transform: none !important;
+    max-height: none !important;
+    max-width: none !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: #fff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .resume-document {
+    position: static !important;
+    width: 100% !important;
+    max-width: 7.3in;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    background: #fff !important;
+    color: #111 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .resume-doc-contact {
+    max-width: 6.4in;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.45;
+  }
+
+  .resume-doc-contact a {
+    color: #111 !important;
+    text-decoration: none !important;
+  }
+
+  .resume-doc-date {
+    white-space: nowrap;
   }
 }
 
