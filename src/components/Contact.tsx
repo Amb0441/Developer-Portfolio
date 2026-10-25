@@ -96,63 +96,63 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 md:py-28 px-6 md:px-12 max-w-7xl mx-auto border-t border-border">
-      <div>
-        <div className="grid md:grid-cols-2 gap-16 md:gap-24">
+    <section id="contact" className="py-16 md:py-24 px-6 md:px-12 max-w-7xl mx-auto">
+      <div className="relative overflow-hidden rounded-[2.2rem] border border-border/70 bg-foreground text-background px-6 py-16 md:px-14 md:py-20">
+        <div className="pointer-events-none absolute -right-16 -top-24 h-72 w-72 rounded-full bg-gold/25 blur-[90px]" />
+        <div className="grid md:grid-cols-2 gap-16 md:gap-24 relative">
           <div>
-            <div className="flex items-center gap-6 mb-10">
-              <h2 className="text-4xl md:text-5xl font-serif tracking-tight">Get in touch</h2>
-            </div>
-            <p className="font-sans text-xl leading-relaxed text-muted-foreground max-w-md mb-8">
-              Whether you have a complex problem to solve, a project in mind, or just want to connect, my inbox is always open.
+            <p className="font-sans text-[11px] uppercase tracking-[0.34em] text-gold mb-4">05 / Hire</p>
+            <h2 className="text-4xl md:text-6xl lg:text-7xl font-serif tracking-tight leading-[0.88] mb-8">Let’s work</h2>
+            <p className="font-sans text-xl font-light leading-relaxed text-background/70 max-w-md mb-8">
+              A short note, LinkedIn, or the resume — I’ll reply.
             </p>
             <div className="space-y-6 font-sans text-lg">
               <p className="flex flex-col">
-                <span className="text-xs text-muted-foreground uppercase tracking-widest font-semibold mb-1">Direct Email</span>
+                <span className="text-xs text-background/50 uppercase tracking-widest font-semibold mb-1">Direct Email</span>
                 <a 
                   href={`mailto:${destinationEmail}`} 
-                  className="inline-flex items-center gap-2 hover:text-primary transition-colors font-medium text-foreground w-fit"
+                  className="inline-flex items-center gap-2 hover:text-gold transition-colors font-medium text-background w-fit"
                 >
-                  <Mail className="w-4 h-4 text-primary" />
+                  <Mail className="w-4 h-4 text-gold" />
                   {destinationEmail}
-                  <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground" />
+                  <ArrowUpRight className="w-3.5 h-3.5 text-background/50" />
                 </a>
               </p>
               <p className="flex flex-col">
-                <span className="text-xs text-muted-foreground uppercase tracking-widest font-semibold mb-1">Location</span>
-                <span className="font-medium text-foreground">Baguio City, Philippines</span>
+                <span className="text-xs text-background/50 uppercase tracking-widest font-semibold mb-1">Location</span>
+                <span className="font-medium text-background">Baguio City, Philippines</span>
               </p>
               <div className="pt-2">
-                <span className="text-xs text-muted-foreground uppercase tracking-widest font-semibold block mb-3">Connect Online</span>
+                <span className="text-xs text-background/50 uppercase tracking-widest font-semibold block mb-3">Connect Online</span>
                 <div className="flex flex-wrap items-center gap-3">
                   <a 
                     href="https://github.com/Amb0441" 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-card border border-border text-foreground hover:border-primary/50 hover:text-primary transition-all text-sm font-medium shadow-xs"
+                    className="inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-background/8 border border-background/15 text-background hover:border-gold/60 hover:text-gold transition-all text-sm font-medium"
                     aria-label="GitHub Profile (Amb0441)"
                   >
                     <Github className="w-4 h-4" />
                     <span>GitHub</span>
-                    <ArrowUpRight className="w-3 h-3 text-muted-foreground" />
+                    <ArrowUpRight className="w-3 h-3 text-background/50" />
                   </a>
                   <a 
                     href="https://www.linkedin.com/in/anthony-ballestra-108272307" 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-card border border-border text-foreground hover:border-primary/50 hover:text-primary transition-all text-sm font-medium shadow-xs"
+                    className="inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-background/8 border border-background/15 text-background hover:border-gold/60 hover:text-gold transition-all text-sm font-medium"
                     aria-label="LinkedIn Profile (Anthony Ballestra)"
                   >
                     <Linkedin className="w-4 h-4" />
                     <span>LinkedIn</span>
-                    <ArrowUpRight className="w-3 h-3 text-muted-foreground" />
+                    <ArrowUpRight className="w-3 h-3 text-background/50" />
                   </a>
                 </div>
               </div>
             </div>
           </div>
           
-          <div className="flex flex-col gap-6 font-sans bg-muted/30 p-8 md:p-10 rounded-2xl border border-border">
+          <div className="flex flex-col gap-6 font-sans bg-background text-foreground p-8 md:p-10 rounded-[1.6rem] border border-background/10">
             {submitSuccess && dispatchedData ? (
               <div className="space-y-6 animate-fade-in-up">
                 <div className="flex items-start gap-4 p-4 rounded-xl bg-primary/10 border border-primary/20">
@@ -248,7 +248,7 @@ export function Contact() {
                     onChange={handleChange}
                     aria-invalid={Boolean(errors.name)}
                     aria-describedby={errors.name ? 'name-error' : undefined}
-                    className="w-full bg-background border border-border rounded-lg px-4 py-3 outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-foreground text-sm"
+                    className="w-full bg-muted/40 border border-border rounded-xl px-4 py-3.5 outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-all text-foreground text-sm"
                     placeholder="e.g. John Doe or Company"
                   />
                 </div>
@@ -268,7 +268,7 @@ export function Contact() {
                     onChange={handleChange}
                     aria-invalid={Boolean(errors.email)}
                     aria-describedby={errors.email ? 'email-error' : undefined}
-                    className="w-full bg-background border border-border rounded-lg px-4 py-3 outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-foreground text-sm"
+                    className="w-full bg-muted/40 border border-border rounded-xl px-4 py-3.5 outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-all text-foreground text-sm"
                     placeholder="e.g. you@example.com"
                   />
                 </div>
@@ -286,7 +286,7 @@ export function Contact() {
                     onChange={handleChange}
                     aria-invalid={Boolean(errors.message)}
                     aria-describedby={errors.message ? 'message-error' : undefined}
-                    className="w-full bg-background border border-border rounded-lg px-4 py-3 outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-foreground resize-none text-sm"
+                    className="w-full bg-muted/40 border border-border rounded-xl px-4 py-3.5 outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-all text-foreground resize-none text-sm"
                     placeholder="Tell me about your project, timeline, or inquiry..."
                   ></textarea>
                 </div>
@@ -294,7 +294,7 @@ export function Contact() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="mt-2 w-full flex items-center justify-center gap-2 bg-foreground text-background py-4 rounded-lg font-medium hover:bg-primary hover:text-primary-foreground transition-colors duration-300 disabled:opacity-50 cursor-pointer"
+                  className="mt-2 w-full flex items-center justify-center gap-2 bg-foreground text-background py-4 rounded-full font-medium hover:bg-primary hover:text-primary-foreground transition-colors duration-300 disabled:opacity-50 cursor-pointer"
                 >
                   {isSubmitting ? (
                     'Preparing Message...'

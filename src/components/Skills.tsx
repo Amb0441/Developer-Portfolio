@@ -1,64 +1,59 @@
-import { Database, Layout, Server, Smartphone } from 'lucide-react';
+import { Reveal } from './Reveal';
+import { SectionTitle } from './SectionTitle';
 
 const skillCategories = [
-  { 
-    title: "Frontend Development", 
-    icon: <Layout className="w-6 h-6 mb-4 text-primary" />,
-    items: ["React", "TypeScript", "JavaScript", "Tailwind CSS"],
-    colSpan: "md:col-span-2",
-    delay: "delay-100"
+  {
+    index: '01',
+    title: 'Frontend',
+    items: ['React', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'Vite'],
   },
-  { 
-    title: "Mobile Development", 
-    icon: <Smartphone className="w-6 h-6 mb-4 text-primary" />,
-    items: ["React Native", "Expo"],
-    colSpan: "md:col-span-1",
-    delay: "delay-200"
+  {
+    index: '02',
+    title: 'Mobile',
+    items: ['React Native', 'Expo'],
   },
-  { 
-    title: "Backend & Tools", 
-    icon: <Server className="w-6 h-6 mb-4 text-primary" />,
-    items: ["Node.js", "Bun", "Docker"],
-    colSpan: "md:col-span-1",
-    delay: "delay-300"
+  {
+    index: '03',
+    title: 'Backend',
+    items: ['Node.js', 'Bun', 'Express', 'Docker'],
   },
-  { 
-    title: "Databases & Cloud", 
-    icon: <Database className="w-6 h-6 mb-4 text-primary" />,
-    items: ["SQL", "NoSQL", "Firebase", "Supabase"],
-    colSpan: "md:col-span-2",
-    delay: "delay-400"
+  {
+    index: '04',
+    title: 'Data & cloud',
+    items: ['SQL', 'NoSQL', 'Firebase', 'Supabase', 'Cloudinary'],
   },
 ];
 
 export function Skills() {
   return (
-    <section id="skills" className="py-20 md:py-28 px-6 md:px-12 max-w-7xl mx-auto border-t border-border">
-      <div>
-        <div className="flex items-center gap-6 mb-12 md:mb-20">
-          <h2 className="text-4xl md:text-5xl font-serif tracking-tight">Capabilities</h2>
-          <div className="flex-grow h-px bg-border"></div>
-        </div>
-        
-        <div className="grid md:grid-cols-3 gap-6">
-          {skillCategories.map((category) => (
-            <div 
-              key={category.title} 
-              className={`p-8 rounded-2xl bg-muted/40 border border-border hover:border-primary/40 hover:bg-muted/80 hover:-translate-y-0.5 transition-all duration-300 ${category.colSpan} scroll-reveal ${category.delay}`}
-            >
-              {category.icon}
-              <h3 className="text-2xl font-serif mb-6">{category.title}</h3>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-4">
-                {category.items.map(item => (
-                  <li key={item} className="font-sans text-muted-foreground flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 bg-primary rounded-full shrink-0"></span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
+    <section id="skills" className="py-24 md:py-32 px-6 md:px-12 max-w-7xl mx-auto">
+      <SectionTitle index="02" title="Skills" kicker="Stack" />
+
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border/80 rounded-[2rem] overflow-hidden border border-border/80">
+        {skillCategories.map((category, i) => (
+          <Reveal
+            key={category.title}
+            delay={i * 0.07}
+            className="group bg-background/80 p-8 md:p-9 hover:bg-card transition-colors duration-500"
+          >
+            <p className="font-sans text-[10px] uppercase tracking-[0.32em] text-gold mb-6">
+              {category.index}
+            </p>
+            <h3 className="text-2xl md:text-[1.9rem] font-serif tracking-tight mb-7">
+              {category.title}
+            </h3>
+            <ul className="flex flex-wrap gap-2">
+              {category.items.map((item) => (
+                <li
+                  key={item}
+                  className="px-3 py-1.5 rounded-full border border-border/80 bg-card/80 font-sans text-xs text-foreground"
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        ))}
       </div>
     </section>
   );

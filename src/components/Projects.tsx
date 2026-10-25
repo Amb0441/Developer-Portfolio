@@ -1,4 +1,7 @@
 import { Github, Smartphone, Globe, Shield } from 'lucide-react';
+import { motion } from 'motion/react';
+import { Reveal } from './Reveal';
+import { SectionTitle } from './SectionTitle';
 
 interface ProjectLink {
   type: 'app' | 'web' | 'github' | 'admin';
@@ -96,6 +99,46 @@ const categories: ProjectCategory[] = [
     label: "Website Development",
     note: "Visual sites and front-end studies.",
     projects: [
+  {
+    title: "NorthLine",
+    badge: "Cairns Real Estate",
+    description: "A Cairns agency site for buying, selling, leasing, and property management: listings, appraisals, and a named contact on every file. Sample data and branding — not a real agency.",
+    tech: ["React", "TypeScript", "Vite", "Tailwind"],
+    links: [
+      {
+        type: "web",
+        url: "https://amb0441.github.io/NorthLine/",
+        label: "Live"
+      },
+      {
+        type: "github",
+        url: "https://github.com/Amb0441/NorthLine",
+        label: "GitHub"
+      }
+    ],
+    image: "/northline.jpg",
+    delay: "delay-100"
+  },
+  {
+    title: "Peakstone",
+    badge: "RE Mockup",
+    description: "A mock real estate agency: sample listings, auctions, inquiries, and contact flows. Names, reviews, and branding are fictional — not a real agency.",
+    tech: ["React", "TypeScript", "Vite", "Tailwind", "Motion"],
+    links: [
+      {
+        type: "web",
+        url: "https://amb0441.github.io/PeakStone/",
+        label: "Live"
+      },
+      {
+        type: "github",
+        url: "https://github.com/Amb0441/PeakStone",
+        label: "GitHub"
+      }
+    ],
+    image: "/peakstone.jpg",
+    delay: "delay-100"
+  },
   {
     title: "Vela Atelier",
     badge: "Kitchen & Bathroom",
@@ -201,12 +244,32 @@ const categories: ProjectCategory[] = [
 ];
 
 function ProjectCard({ project }: { project: Project }) {
+  const liveUrl = project.links.find((link) => link.type === 'web' || link.type === 'app')?.url;
+
   return (
-            <div 
-              className={`group flex flex-col bg-muted/40 border border-border rounded-2xl overflow-hidden hover:border-primary/50 hover:shadow-xl transition-all duration-300 scroll-reveal ${project.delay}`}
+            <motion.div
+              whileHover={{ y: -6 }}
+              transition={{ type: 'spring', stiffness: 260, damping: 22 }}
+              className="group flex flex-col h-full bg-card/80 border border-border/80 rounded-[2rem] overflow-hidden hover:border-gold/50 hover:shadow-[0_36px_90px_-30px_rgba(20,17,14,0.5)] transition-colors duration-500"
             >
               {/* Image Container with Zoom on Hover */}
               <div className="relative aspect-[16/10] overflow-hidden bg-muted">
+                {liveUrl ? (
+                  <a href={liveUrl} target="_blank" rel="noopener noreferrer" className="block h-full w-full" aria-label={`Open ${project.title}`}>
+                    <img 
+                      src={project.image} 
+                      alt={project.title} 
+                      loading="lazy"
+                      onError={(e) => {
+                        const target = e.currentTarget;
+                        if (target.src.includes('/safe.png')) {
+                          target.src = '/safeclinic.jpg';
+                        }
+                      }}
+                      className="w-full h-full object-cover transform-gpu will-change-transform group-hover:scale-110 transition-transform duration-[800ms] ease-out"
+                    />
+                  </a>
+                ) : (
                 <img 
                   src={project.image} 
                   alt={project.title} 
@@ -217,13 +280,14 @@ function ProjectCard({ project }: { project: Project }) {
                       target.src = '/safeclinic.jpg';
                     }
                   }}
-                  className="w-full h-full object-cover transform-gpu will-change-transform group-hover:scale-105 transition-transform duration-500 ease-out"
+                  className="w-full h-full object-cover transform-gpu will-change-transform group-hover:scale-110 transition-transform duration-[800ms] ease-out"
                 />
+                )}
                 
                 {/* Badge Overlay */}
                 {project.badge && (
                   <div className="absolute top-4 left-4 z-10">
-                    <span className="px-3 py-1 text-xs font-sans font-medium rounded-full bg-background/85 backdrop-blur-md text-foreground border border-border/80 shadow-sm">
+                    <span className="px-3 py-1 text-[11px] font-sans tracking-[0.14em] uppercase rounded-full bg-background/80 backdrop-blur-md text-foreground border border-gold/30 shadow-sm">
                       {project.badge}
                     </span>
                   </div>
@@ -266,8 +330,14 @@ function ProjectCard({ project }: { project: Project }) {
               {/* Content Box */}
               <div className="p-6 md:p-8 flex flex-col flex-grow">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between mb-3">
-                  <h4 className="text-2xl md:text-3xl font-serif text-foreground group-hover:text-primary transition-colors">
-                    {project.title}
+                  <h4 className="text-2xl md:text-[2rem] font-serif text-foreground group-hover:text-primary transition-colors duration-500">
+                    {liveUrl ? (
+                      <a href={liveUrl} target="_blank" rel="noopener noreferrer">
+                        {project.title}
+                      </a>
+                    ) : (
+                      project.title
+                    )}
                   </h4>
                   
                   <div className="flex items-center gap-2 shrink-0">
@@ -305,41 +375,38 @@ function ProjectCard({ project }: { project: Project }) {
 
                 <div className="flex flex-wrap gap-2 mt-auto pt-4 border-t border-border/60">
                   {project.tech.map(tech => (
-                    <span key={tech} className="px-3 py-1 bg-background border border-border rounded-full text-xs font-sans font-medium text-foreground">
+                    <span key={tech} className="px-3 py-1 bg-background/70 border border-border/80 rounded-full text-[11px] font-sans tracking-wide text-muted-foreground">
                       {tech}
                     </span>
                   ))}
                 </div>
               </div>
-            </div>
+            </motion.div>
   );
 }
 
 export function Projects() {
   return (
-    <section id="projects" className="py-20 md:py-28 px-6 md:px-12 max-w-7xl mx-auto">
-      <div>
-        <div className="flex items-center gap-6 mb-12 md:mb-16">
-          <h2 className="text-4xl md:text-5xl font-serif tracking-tight">Selected Works</h2>
-          <div className="flex-grow h-px bg-border"></div>
-        </div>
+    <section id="projects" className="py-24 md:py-32 px-6 md:px-12 max-w-7xl mx-auto">
+      <SectionTitle index="03" title="Selected Work" kicker="Portfolio" />
 
         <div className="flex flex-col gap-16 md:gap-24">
           {categories.map((category) => (
             <div key={category.id}>
-              <div className="mb-8 md:mb-10">
-                <h3 className="text-2xl md:text-3xl font-serif tracking-tight">{category.label}</h3>
-                <p className="mt-2 text-sm font-sans text-muted-foreground">{category.note}</p>
-              </div>
-              <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-                {category.projects.map((project) => (
-                  <ProjectCard key={project.title} project={project} />
+              <Reveal className="mb-8 md:mb-12">
+                <h3 className="text-2xl md:text-4xl font-serif tracking-tight italic">{category.label}</h3>
+                <p className="mt-2 text-sm font-sans text-muted-foreground max-w-xl">{category.note}</p>
+              </Reveal>
+              <div className="grid md:grid-cols-2 gap-8 lg:gap-10">
+                {category.projects.map((project, i) => (
+                  <Reveal key={project.title} delay={i * 0.08} className="h-full">
+                    <ProjectCard project={project} />
+                  </Reveal>
                 ))}
               </div>
             </div>
           ))}
         </div>
-      </div>
     </section>
   );
 }

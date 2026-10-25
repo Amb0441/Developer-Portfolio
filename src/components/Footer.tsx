@@ -2,46 +2,55 @@ import { ArrowUp, Github, Linkedin, Mail } from 'lucide-react';
 
 export function Footer() {
   return (
-    <footer className="py-12 px-6 md:px-12 max-w-7xl mx-auto border-t border-border flex flex-col md:flex-row justify-between items-center gap-6 font-sans text-xs uppercase tracking-[0.15em]">
-      <p className="opacity-50">© {new Date().getFullYear()} Anthony M. Ballestra. All rights reserved.</p>
-      
-      <div className="flex items-center gap-6">
-        <a 
-          href="https://github.com/Amb0441" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2 normal-case tracking-normal text-xs font-medium"
-          aria-label="GitHub Profile"
-        >
-          <Github className="w-4 h-4" />
-          <span>GitHub</span>
-        </a>
-        <a 
-          href="https://www.linkedin.com/in/anthony-ballestra-108272307" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2 normal-case tracking-normal text-xs font-medium"
-          aria-label="LinkedIn Profile"
-        >
-          <Linkedin className="w-4 h-4" />
-          <span>LinkedIn</span>
-        </a>
-        <a 
-          href="mailto:aanthonyb.dev@gmail.com" 
-          className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2 normal-case tracking-normal text-xs font-medium"
-          aria-label="Send direct email"
-        >
-          <Mail className="w-4 h-4" />
-          <span>Email</span>
-        </a>
-        <a
-          href="#hero"
-          className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 normal-case tracking-normal text-xs font-medium"
-          aria-label="Back to top"
-        >
-          <ArrowUp className="w-4 h-4" />
-          <span>Top</span>
-        </a>
+    <footer className="relative overflow-hidden border-t border-border/70">
+      <div className="hairline" />
+      <p
+        aria-hidden="true"
+        className="pointer-events-none select-none absolute -bottom-10 left-0 right-0 text-center font-serif italic text-[20vw] leading-none text-foreground/[0.055] whitespace-nowrap"
+      >
+        Ballestra
+      </p>
+      <div className="relative py-14 px-6 md:px-12 max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 font-sans text-xs uppercase tracking-[0.15em]">
+        <p className="opacity-50">© {new Date().getFullYear()} Anthony M. Ballestra. All rights reserved.</p>
+
+        <div className="flex items-center gap-6">
+          <a
+            href="https://github.com/Amb0441"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2 normal-case tracking-normal text-xs font-medium"
+            aria-label="GitHub Profile"
+          >
+            <Github className="w-4 h-4" />
+            <span>GitHub</span>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/anthony-ballestra-108272307"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2 normal-case tracking-normal text-xs font-medium"
+            aria-label="LinkedIn Profile"
+          >
+            <Linkedin className="w-4 h-4" />
+            <span>LinkedIn</span>
+          </a>
+          <a
+            href="mailto:aanthonyb.dev@gmail.com"
+            className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2 normal-case tracking-normal text-xs font-medium"
+            aria-label="Send direct email"
+          >
+            <Mail className="w-4 h-4" />
+            <span>Email</span>
+          </a>
+          <a
+            href="#hero"
+            className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 normal-case tracking-normal text-xs font-medium"
+            aria-label="Back to top"
+          >
+            <ArrowUp className="w-4 h-4" />
+            <span>Top</span>
+          </a>
+        </div>
       </div>
     </footer>
   );

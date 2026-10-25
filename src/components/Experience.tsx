@@ -1,34 +1,49 @@
+import { Reveal } from './Reveal';
+import { SectionTitle } from './SectionTitle';
+
 const experiences = [
   {
-    role: "Full Stack Developer Intern",
-    company: "Moneytrees",
-    period: "2026",
-    delay: "delay-100"
-  }
+    role: 'Web Developer',
+    company: 'Freelance',
+    period: 'August 2026 – Present',
+    detail: 'Design and launch responsive client websites, from UI layout through production.',
+  },
+  {
+    role: 'Full Stack Developer Intern',
+    company: 'Moneytrees',
+    period: 'July 2026 – August 2026',
+    detail: 'Built Safe Clinic, a React CRM and React Native app for intake, scheduling, and clinical records.',
+  },
+  {
+    role: 'PC Building and Troubleshooting',
+    company: 'Freelance',
+    period: 'April 2020 – December 2022',
+    detail: 'Assembled custom PCs, upgraded hardware, and diagnosed hardware and software issues.',
+  },
 ];
 
 export function Experience() {
   return (
-    <section id="experience" className="py-20 md:py-28 px-6 md:px-12 max-w-7xl mx-auto border-t border-border">
-      <div className="grid md:grid-cols-4 gap-12 md:gap-24">
-        <h2 className="text-4xl md:text-5xl md:col-span-1 tracking-tight">
-          Experience
-        </h2>
-        
-        <div className="md:col-span-3 flex flex-col border-t border-border">
-          {experiences.map((exp, index) => (
-            <div 
-              key={index} 
-              className={`flex flex-col lg:flex-row lg:items-center justify-between py-10 border-b border-border group scroll-reveal ${exp.delay}`}
-            >
-              <h3 className="text-2xl md:text-3xl font-serif mb-4 lg:mb-0 group-hover:text-primary transition-colors duration-300">{exp.role}</h3>
-              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-12 font-sans text-xs uppercase tracking-[0.2em]">
-                <span className="font-semibold text-foreground">{exp.company}</span>
-                <span className="opacity-50 text-muted-foreground">{exp.period}</span>
+    <section id="experience" className="py-24 md:py-32 px-6 md:px-12 max-w-7xl mx-auto">
+      <SectionTitle index="04" title="Experience" kicker="Path" />
+
+      <div className="relative">
+        <div className="absolute left-0 md:left-3 top-0 bottom-0 w-px bg-gradient-to-b from-gold via-border to-transparent" aria-hidden="true" />
+        {experiences.map((exp) => (
+          <Reveal key={`${exp.role}-${exp.period}`} className="relative pl-8 md:pl-12 py-8 group">
+            <span className="absolute left-[-5px] md:left-[7px] top-11 h-2.5 w-2.5 rounded-full bg-gold shadow-[0_0_0_6px_var(--background)]" />
+            <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
+              <div className="max-w-2xl">
+                <p className="font-sans text-[11px] uppercase tracking-[0.22em] text-gold mb-2">{exp.period}</p>
+                <h3 className="text-3xl md:text-5xl font-serif tracking-tight">
+                  {exp.role}
+                </h3>
+                <p className="mt-3 font-sans text-muted-foreground leading-relaxed">{exp.detail}</p>
               </div>
+              <p className="font-sans text-sm uppercase tracking-[0.2em] text-foreground lg:pt-8">{exp.company}</p>
             </div>
-          ))}
-        </div>
+          </Reveal>
+        ))}
       </div>
     </section>
   );

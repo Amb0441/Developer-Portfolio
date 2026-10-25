@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Moon, Sun, Menu, X, FileText } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
+import { AnimatePresence, motion } from 'motion/react';
 
 const navLinks = [
   { name: 'About', href: '#about' },
@@ -64,14 +65,14 @@ export function Navbar({ onOpenResume }: NavbarProps) {
   }, [mobileMenuOpen]);
 
   return (
-    <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled || mobileMenuOpen ? 'bg-background/85 backdrop-blur-xl border-b border-border/80 shadow-sm' : 'bg-transparent'}`}>
+    <header className={`sticky top-0 z-50 transition-all duration-500 ${scrolled || mobileMenuOpen ? 'bg-background/55 backdrop-blur-2xl border-b border-border/50 shadow-[0_10px_40px_-24px_rgba(20,17,14,0.35)]' : 'bg-transparent'}`}>
       <nav className="w-full" aria-label="Primary">
-        <div className={`max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center transition-all duration-300 ${scrolled ? 'py-4' : 'py-6 md:py-8'}`}>
-          <a href="#hero" className="text-xl md:text-2xl font-serif tracking-tight rounded-sm">
-            AMB.
+        <div className={`max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center transition-all duration-500 ${scrolled ? 'py-3.5' : 'py-6 md:py-8'}`}>
+          <a href="#hero" className="text-xl md:text-[1.65rem] font-serif tracking-[0.08em] rounded-sm hover:text-primary transition-colors">
+            AMB<span className="text-gold">.</span>
           </a>
-          
-          <div className="hidden md:flex items-center gap-8 font-sans text-xs uppercase tracking-[0.2em]">
+
+          <div className="hidden md:flex items-center gap-8 font-sans text-xs uppercase tracking-[0.22em]">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -79,13 +80,13 @@ export function Navbar({ onOpenResume }: NavbarProps) {
                 className={`relative py-1 transition-colors ${active === link.href.slice(1) ? 'text-primary' : 'text-foreground hover:text-primary'}`}
               >
                 {link.name}
-                <span className={`absolute left-0 -bottom-0.5 h-px bg-primary transition-all duration-300 ${active === link.href.slice(1) ? 'w-full' : 'w-0'}`} />
+                <span className={`absolute left-0 -bottom-0.5 h-px bg-primary transition-all duration-500 ${active === link.href.slice(1) ? 'w-full' : 'w-0'}`} />
               </a>
             ))}
             <button
               type="button"
               onClick={onOpenResume}
-              className="ml-2 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border text-[11px] tracking-[0.14em] hover:border-primary/50 hover:text-primary transition-colors"
+              className="ml-2 inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-foreground text-background text-[11px] tracking-[0.16em] hover:bg-primary hover:text-primary-foreground transition-colors"
               aria-haspopup="dialog"
             >
               <FileText className="h-3.5 w-3.5" strokeWidth={1.5} />
@@ -122,36 +123,43 @@ export function Navbar({ onOpenResume }: NavbarProps) {
           </div>
         </div>
 
-        <div 
-          id="mobile-nav"
-          aria-hidden={!mobileMenuOpen}
-          className={`md:hidden overflow-hidden border-b border-border bg-background/95 backdrop-blur-xl transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'max-h-[22rem] opacity-100' : 'max-h-0 opacity-0 border-transparent pointer-events-none'}`}
-        >
-          <div className="px-6 py-6 flex flex-col gap-2 font-sans text-sm uppercase tracking-[0.2em]">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`py-3 ${active === link.href.slice(1) ? 'text-primary' : 'text-foreground'}`}
-              >
-                {link.name}
-              </a>
-            ))}
-            <button
-              type="button"
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenResume();
-              }}
-              className="py-3 text-left inline-flex items-center gap-2"
-              aria-haspopup="dialog"
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              id="mobile-nav"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="md:hidden overflow-hidden border-b border-border bg-background/95 backdrop-blur-xl"
             >
-              <FileText className="h-4 w-4" strokeWidth={1.5} />
-              Resume
-            </button>
-          </div>
-        </div>
+              <div className="px-6 py-6 flex flex-col gap-2 font-sans text-sm uppercase tracking-[0.2em]">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`py-3 ${active === link.href.slice(1) ? 'text-primary' : 'text-foreground'}`}
+                  >
+                    {link.name}
+                  </a>
+                ))}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onOpenResume();
+                  }}
+                  className="py-3 text-left inline-flex items-center gap-2"
+                  aria-haspopup="dialog"
+                >
+                  <FileText className="h-4 w-4" strokeWidth={1.5} />
+                  Resume
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
     </header>
   );
